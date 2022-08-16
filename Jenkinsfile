@@ -8,9 +8,7 @@ pipeline {
      }
     stages {
         stage("init") {            
-            steps {
-                echo "building version ${NEW_VERSION}"  //HAVE TO BE WRITTEN INSIDE double quotes
-                echo "building version ${SERVER_CREDENTIALS}" // YOU CAN DEFIVE AND RETRIEVE CREDENTIALS FROM JENKINS AS DESCRIPED ABOVE 
+            steps {           
                 script {
                     gv = load "script.groovy"
                 }
@@ -22,12 +20,7 @@ pipeline {
                     params.excuteTests == true
                 }
             }
-            steps {
-                withCredentials([
-                    usernamePassowrd(credentials: 'server-credentials',usernameVariable:USER, passwordVariable: PWD)
-                ]) {
-                    sh "some script ${USER} ${PWD}"
-                }
+            steps {               
                 script {
                     echo "building jar"
                     //gv.buildJar()
