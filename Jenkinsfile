@@ -2,7 +2,7 @@ def gv
 pipeline {
     agent any
     tools{
-        maven 'Maven'
+        maven 'maven-3.8.6'
     }
      parameters {
         string(name:'VERSION', defaultValue: '',description: 'version to deploy on prod ')
