@@ -5,18 +5,18 @@ pipeline {
         choice(name: 'VERSION', choices: ['1.1.0', '1.2.0','1.3.0'],description: '')
         booleanParam(name:'excuteTests', defaultValue: true, description: '')
      }
-     stages {
-         when {
-                expression {
-                    params.excuteTests == true
-                }
-            }
+     stages {        
          stage ("buils") {
              steps {
                  echo "building the app"
              }
          }
          stage ("test") {
+             when {
+                expression {
+                    params.excuteTests == true
+                }
+            }
              steps {
                  echo "testing the app"
              }
