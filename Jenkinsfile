@@ -7,11 +7,7 @@ pipeline {
     stages {
         stage("init") {            
             steps {
-                //echo "building version ${NEW_VERSION}"  //HAVE TO BE WRITTEN INSIDE double quotes
-                //echo "building version ${SERVER_CREDENTIALS}" // YOU CAN DEFIVE AND RETRIEVE CREDENTIALS FROM JENKINS AS DESCRIPED ABOVE 
-                //script {
-                    gv = load "script.groovy"
-                }
+                
                 echo " welcome ya hamada "
             }
         }
@@ -22,15 +18,11 @@ pipeline {
                 }
             }
             steps {
-                withCredentials([
-                    usernamePassowrd(credentials: 'gitlab-credintials',usernameVariable:USER, passwordVariable: PWD)
-                ]) {
-                    sh "some script ${USER} ${PWD}"
-                }
-                script {
+                
+            script {
                     echo "building jar"
                     //gv.buildJar()
-                }
+                
             }
         }
         stage("build image") {
