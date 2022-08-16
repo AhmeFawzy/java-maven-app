@@ -1,4 +1,4 @@
-def gv
+    def gv
 pipeline {
     agent any
     tools{
@@ -39,11 +39,17 @@ pipeline {
             }
         }
         stage("deploy") {
+            input {
+                message "select the env you want to deploy to"
+                ok "done"
+                parameters {
+                    choice(name:"ENV", choices: ['dev', 'staging', 'prod],description: '')
+                }
+            }
             steps {
-                script {
-                    echo "deploying"
+                script {                   
                     gv.deployApp()
-                    echo "deploying version ${params.VERSION}"
+                    echo "deploying to ${ENV}"
                 }
             }
         }
