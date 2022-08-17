@@ -1,3 +1,5 @@
+#!/usr/bin/env groovy
+@Library('jenkins-shared-lib')
 def gv
 pipeline {
     agent any    
@@ -12,24 +14,20 @@ pipeline {
             }
             }
         }
-        stage("test") {            
+        stage("build jar") {
             steps {
                 script {
                     echo "deploying the branch $BRANCH_NAME"
-                    gv.buildJar()
+                    buildJar()
                 }
             }
         }
-        stage("build ") {
-            when{
-                expression {
-                    BRANCH_NAME == 'master'
-                }
-            }
+        stage("build image") {
+
             steps {
                 script {
                     
-                    gv.buildImage()
+                    buildImage()
                 }
             }
         }
