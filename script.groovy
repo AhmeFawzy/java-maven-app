@@ -6,9 +6,9 @@ def buildJar() {
 def buildImage() {
     echo "building the docker image..."
     withCredentials([usernamePassword(credentialsId: 'nexus-admin-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-        sh 'docker build -t 207.154.251.118:8083/floki:1.0 .'
+        sh 'docker build -t 207.154.251.118:8083/floki:jenkins-jobs .'
         sh "echo $PASS | docker login -u $USER --password-stdin 207.154.251.118:8083"
-        sh 'docker push 207.154.251.118:8083/floki:1.0'
+        sh 'docker push 207.154.251.118:8083/microsoft:jenkins-jobs'
     }
 } 
 
