@@ -16,7 +16,7 @@ pipeline {
             steps {
                 script {
                     echo "deploying the branch $BRANCH_NAME"
-                   gv = load "script.groovy"
+                    gv.buildJar()
                 }
             }
         }
@@ -28,8 +28,8 @@ pipeline {
             }
             steps {
                 script {
-                    echo "building the application"
-                    gv.buildJar()
+                    
+                    gv.buildImage()
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
             }
             steps {
                 script {
-                    echo "deploying the application"
+                    
                     gv.deployApp()
                 }
             }
