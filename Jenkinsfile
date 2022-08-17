@@ -32,7 +32,7 @@ pipeline {
             steps {
                 script {
                     
-                    buildImage '207.154.251.118:8083/new-test-shared:1.0'
+                    buildImage '207.154.251.118:8083/floki:4.0'
                 }
             }
         }
