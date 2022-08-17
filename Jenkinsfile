@@ -1,13 +1,18 @@
-
+def gv
 pipeline {
     agent any    
-    
+    tools {
+        maven 'maven-3.8.6'
+    }
     stages {
+        stage ("init") {
+            gv = load "script.groovy"
+        }
         stage("test") {            
             steps {
                 script {
                     echo "deploying the branch $BRANCH_NAME"
-                   // gv = load "script.groovy"
+                   gv = load "script.groovy"
                 }
             }
         }
@@ -20,7 +25,7 @@ pipeline {
             steps {
                 script {
                     echo "building the application"
-                    //gv.buildJar()
+                    gv.buildJar()
                 }
             }
         }
@@ -33,7 +38,7 @@ pipeline {
             steps {
                 script {
                     echo "deploying the application"
-                   // gv.deployApp()
+                    gv.deployApp()
                 }
             }
         }
