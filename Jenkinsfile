@@ -17,7 +17,7 @@ pipeline {
         stage("build jar") {
         when {
             expression{
-                BRANCH_NAME == 'master'
+                BRANCH_NAME == 'master || jenkins-shared-lib'
             }
         }
             steps {
@@ -27,19 +27,21 @@ pipeline {
                 }
             }
         }
-        stage("build image") {
+        stage("build and push image") {
 
             steps {
                 script {
                     
-                    buildImage '207.154.251.118:8083/microsoft:jenkins-shared-lib'
+                    buildImage '207.154.251.118:8083/microsoft:jenkins-shared-lib222'
+                    dockerLogin()
+                    dockerPush(207.154.251.118:8083/microsoft:jenkins-shared-lib222)
                 }
             }
         }
         stage("deploy") {
             when{
                 expression {
-                    BRANCH_NAME == 'master'
+                    BRANCH_NAME == 'master || jenkins-shared-lib'
                 }
             }
             steps {
