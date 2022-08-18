@@ -34,7 +34,7 @@ pipeline {
                     
                     buildImage '207.154.251.118:8083/microsoft:jenkins-shared-lib222'
                     DockerLogin()
-                    dockerPush(207.154.251.118:8083/microsoft:jenkins-shared-lib222)
+                    dockerPush'207.154.251.118:8083/microsoft:jenkins-shared-lib222'
                 }
             }
         }
