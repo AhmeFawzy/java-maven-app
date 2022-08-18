@@ -15,11 +15,6 @@ pipeline {
             }
         }
         stage("build jar") {
-        when {
-            expression{
-                BRANCH_NAME == 'master || jenkins-shared-lib'
-            }
-        }
             steps {
                 script {
                     echo "deploying the branch $BRANCH_NAME"
@@ -39,11 +34,6 @@ pipeline {
             }
         }
         stage("deploy") {
-            when{
-                expression {
-                    BRANCH_NAME == 'master || jenkins-shared-lib'
-                }
-            }
             steps {
                 script {
                     
