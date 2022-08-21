@@ -9,9 +9,10 @@ pipeline {
         stage("init") {            
             steps {
                 script {
-                    gv = load "script.groovy"
                     echo " testing the integration"
                     echo " i missed her way so much "
+                    gv = load "script.groovy"
+                    
                 }
             }
         }
