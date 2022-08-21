@@ -11,16 +11,16 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    echo "building jar"
-                    gv.buildJar()
+                    echo " jar"
+            
                 }
             }
         }
         stage("build image") {
             steps {
                 script {
-                    echo "building image"
-                    gv.buildImage()
+                    echo " image"
+                 
                 }
             }
         }
@@ -28,7 +28,7 @@ pipeline {
             steps {
                 script {
                     echo "deploying"
-                    gv.deployApp()
+              
                 }
             }
         }
