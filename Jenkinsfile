@@ -1,10 +1,11 @@
+#!usr/bin/env groovy
 pipeline {
     agent any      
     stages {
         stage("test") {            
             steps {
                 script {
-                    echo " testing the integration"                                    
+                    echo "i'm just wondering, when i will pass all that shit"                                    
                 }
             }
         }
