@@ -1,4 +1,3 @@
-def gv
 pipeline {
     agent any    
      tools{
@@ -6,34 +5,32 @@ pipeline {
      }
     
     stages {
-        stage("init") {            
+        stage("build app") {            
             steps {
                 script {
-                    gv = load "script.groovy"
-                }
-            }
-        }
-        stage("build jar") {
-            steps {
-                script {
-                    echo "building jar"
-                    gv.buildJar()
+                    echo "building the app"
+                    sh 'mvn package'
                 }
             }
         }
         stage("build image") {
             steps {
                 script {
-                    echo "building image"
-                    gv.buildImage()
+                    echo "building the docker image ..."
+                    echo "building the docker image... and we will try to upload it to nexus repository"
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    sh 'docker build -t flokiboats/my-repo:master .'
+                    sh "echo $PASS | docker login -u $USER --password-stdin "
+                    sh 'docker push flokiboats/my-repo:master'
+    }
                 }
             }
         }
-        stage("deploy") {
+        stage("deply") {
             steps {
                 script {
-                    echo "deploying"
-                    gv.deployApp()
+                    echo "deploying docker image to ec2..."
+                    
                 }
             }
         }
