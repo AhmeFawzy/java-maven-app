@@ -10,7 +10,10 @@ pipeline {
                 script{
                 echo " incrementing the version..."
                 sh 'mvn build-helper:parse-version versions:set -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion}
-versions:commit'
+                    versions:commit'
+                def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                def version = matcher[0][1]
+                env.IMAGE_NAME = "$version-$BUILD_NUMBER"
                 }
             }
         }
@@ -18,7 +21,7 @@ versions:commit'
             steps {
                 script {
                     echo "building the app"
-                    sh 'mvn package'
+                    sh 'mvn clean package'
                 }
             }
         }
@@ -28,9 +31,10 @@ versions:commit'
                     echo "building the docker image ..."
                     echo "building the docker image... and we will try to upload it to nexus repository"
                     withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                    sh 'docker build -t flokiboats/my-repo:master .'
+                    sh "docker build -t flokiboats/my-repo:$IMAGE_NAME ."
                     sh "echo $PASS | docker login -u $USER --password-stdin "
-                    sh 'docker push flokiboats/my-repo:master'
+                    sh "docker push flokiboats/my-repo:$IMAGE_NAME"
+
     }
                 }
             }
