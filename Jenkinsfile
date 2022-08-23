@@ -12,7 +12,7 @@ pipeline {
         stage("build jar") {
             steps {
                 script {
-                    echo " jar"
+                    echo " jar bar disco"
             
                 }
             }
@@ -20,7 +20,7 @@ pipeline {
         stage("build image") {
             steps {
                 script {
-                    echo " image"
+                    echo " image loves you so much"
                  
                 }
             }
