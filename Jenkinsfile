@@ -41,7 +41,7 @@ pipeline {
         stage("deply") {
             steps {
                 script {
-                    echo "deploying docker image to EC2...here we go"
+                    echo "deploying docker image to EC2...here we goOoO"
                     
                 }
             }
