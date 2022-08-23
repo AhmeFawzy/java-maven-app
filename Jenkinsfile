@@ -29,7 +29,7 @@ pipeline {
                 script {
                     echo "building the docker image ..."
                     echo "building the docker image... and we will try to upload it to nexus repository"
-                    withCredentials([usernamePassword(credentialsId: 'nexus-admin-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                    withCredentials([usernamePassword(credentialsId: 'docker-hub-repo', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                     sh " docker build -t flokiboats/my-repo:$IMAGE_NAME . "
                     sh " echo $PASS | docker login -u $USER --password-stdin "
                     sh " docker push flokiboats/my-repo:$IMAGE_NAME "
