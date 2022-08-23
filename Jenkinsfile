@@ -52,14 +52,17 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'gitlab-credintials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        // git config here for the first time run
-                       // sh 'git config --global user.email "jenkins@example.com"'
-                     //   sh 'git config --global user.name "jenkins"'
+                         git config here for the first time run
+                        sh 'git config --global user.email "jenkins@example.com"'
+                        sh 'git config --global user.name "jenkins"'
 
-                       // sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/ahmedfawzy286/java-maven-app"
-                       // sh 'git add .'
-                       // sh 'git commit -m "ci: version bump"'
-                        //sh 'git push origin HEAD:TEST-INCREMENT-VERSION'
+                        sh 'git status'
+                        sh 'git branch'
+                        sh 'git config --list'
+                        sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/ahmedfawzy286/java-maven-app"
+                        sh 'git add .'
+                        sh 'git commit -m "ci: version bump"'
+                        sh 'git push origin HEAD:TEST-INCREMENT-VERSION'
                     }
                 }
             }
