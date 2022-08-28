@@ -28,7 +28,11 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
+                    def dockerCmd = 'docker run -p 80:80 -d --name jenkinswebapp flokiboats/my-repo:webapp'
                     echo "deploying"
+                    sshagent(['ec2-server-key']) {
+                       sh "ssh -o StrictHostKeyChecking=no ec2-user@3.83.81.128 ${dockerCmd}"
+                    }
               
                 }
             }
