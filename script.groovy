@@ -1,7 +1,5 @@
 
-def environment{
-        IMAGE_NAME = 'flokiboats/my-repo:java-maven-'
-    } 
+
 def ingnore-jenkins-commit () {
     withCredentials([usernamePassword(credentialsId: 'gitlab-credintials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         // git config here for the first time run
