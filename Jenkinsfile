@@ -5,7 +5,7 @@ library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
          credentialsId: 'gitlab-credintials'
         ]
 )
-def gv = load ("script.groovy")
+def gv = load "script.groovy"
 
 pipeline {
     agent any    
