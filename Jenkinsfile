@@ -13,7 +13,7 @@ pipeline {
         maven 'maven-3.8.6'
     }
     environment {
-        IMAGE_NAME = 'flokiboats/my-repo:java-maven-'
+        //IMAGE_NAME = 'flokiboats/my-repo:java-maven-'
     }
     stages {
           stage('increment version') {
