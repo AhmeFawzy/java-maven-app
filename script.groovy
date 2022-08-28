@@ -16,16 +16,13 @@ def ingnore-jenkins-commit () {
                     }
 }
 def increment() {
-    def environment{
-        IMAGE_NAME = "flokiboats/my-repo:java-maven-"
-    }
     echo 'incrementing app version...'
                     sh 'mvn build-helper:parse-version versions:set \
                         -DnewVersion=\\\${parsedVersion.nextmajorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
                         versions:commit'
                     def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
                     def version = matcher[0][1]
-                    env.IMAGE_NAME = "${IMAGE_NAME}$version-$BUILD_NUMBER"
+                    env.IMAGE_NAME = "flokiboats/my-repo:java-maven-$version-$BUILD_NUMBER"
 }
 def deployapp () {
      // def dockerCmd = "docker run -p 8080:8080 -d --name new-trial ${IMAGE_NAME}"
