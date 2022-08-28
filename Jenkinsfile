@@ -7,7 +7,7 @@ library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
 )
 
 def gv
-evaluate(new File("script.groovy"))
+
 pipeline {
     agent any    
     tools {
