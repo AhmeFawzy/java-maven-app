@@ -1,8 +1,8 @@
 version: '3.8'
 services:
     jave-maven-app:
-      image: 
-      port: 
+      image: flokiboats/my-repo:java-maven-1.0
+      ports: 
         - 8080:8080
     postgres:
        image: postgres:13 
@@ -10,4 +10,4 @@ services:
           - 5432:5432
         environment:
           - POSTGRES_PASSWORD:my-pwd
-          
+
