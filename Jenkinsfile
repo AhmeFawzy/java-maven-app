@@ -13,7 +13,7 @@ pipeline {
         maven 'maven-3.8.6'
     }
     environment {
-        IMAGE_NAME = 'flokibaots/my-repo:java-maven-1.0'
+        IMAGE_NAME = 'flokiboats/my-repo:java-maven-1.0'
     }
     stages {
         stage ("build app") {
@@ -30,9 +30,9 @@ pipeline {
             steps {
                 script {
                     echo "building docker image ... "
-                    buildImage (env.IMAGE_NAME)
+                    buildImage(env.IMAGE_NAME)
                     DockerLogin()
-                    dockerPush (env.IMAGE_NAME)
+                    dockerPush(env.IMAGE_NAME)
                 }
             }
         }
