@@ -6,7 +6,7 @@ library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
         ]
 )
 def gv
-def externalMethod = load("script.groovy")
+
 pipeline {
     agent any    
     tools {
@@ -17,7 +17,7 @@ pipeline {
           stage('increment the app version') {
             steps {
                 script {
-                    
+                    def externalMethod = load("script.groovy")
                     gv.increment()
                 }
             }
