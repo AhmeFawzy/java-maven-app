@@ -14,10 +14,17 @@ pipeline {
     }
 
     stages {
-          stage('increment the app version') {
+        stage("init") {
             steps {
                 script {
-                    def externalMethod = load("script.groovy")
+                    gv = load "script.groovy"
+                }
+            }
+        }
+
+        stage('increment the app version') {
+            steps {
+                script {                   
                     gv.increment()
                 }
             }
