@@ -12,10 +12,10 @@ pipeline {
     tools {
         maven 'maven-3.8.6'
     }
-    //environment {
-        //IMAGE_NAME = 'flokiboats/my-repo:java-maven-'
-      //  gv.environment()
-   // }
+    environment {
+        IMAGE_NAME = "${env.IMAGE_NAME}"
+        gv.environment()
+    }
     stages {
           stage('increment version') {
             steps {
