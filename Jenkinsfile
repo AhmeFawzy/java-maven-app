@@ -13,10 +13,7 @@ pipeline {
     tools {
         maven 'maven-3.8.6'
     }
-    environment {
-        IMAGE_NAME = "${env.IMAGE_NAME}"
-        
-    }
+
     stages {
           stage('increment version') {
             steps {

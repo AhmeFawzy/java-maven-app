@@ -1,20 +1,3 @@
-
-
-def ingnore-jenkins-commit () {
-    withCredentials([usernamePassword(credentialsId: 'gitlab-credintials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        // git config here for the first time run
-                        sh 'git config --global user.email "jenkins@example.com"'
-                        sh 'git config --global user.name "jenkins"'
-
-                        sh 'git status'
-                        sh 'git branch'
-                        sh 'git config --list'
-                        sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/ahmedfawzy286/java-maven-app"
-                        sh 'git add .'
-                        sh 'git commit -m "ci: version bump"'
-                        sh 'git push origin HEAD:TEST-INCREMENT-VERSION'
-                    }
-}
 def increment() {
     echo 'incrementing app version...'
                     sh 'mvn build-helper:parse-version versions:set \
@@ -24,6 +7,7 @@ def increment() {
                     def version = matcher[0][1]
                     env.IMAGE_NAME = "flokiboats/my-repo:java-maven-$version-$BUILD_NUMBER" 
 }
+
 def deployapp () {
      // def dockerCmd = "docker run -p 8080:8080 -d --name new-trial ${IMAGE_NAME}"
                    //def dockercomposecmd = "docker-compose -f docker-compose.yaml up --detach"
@@ -37,4 +21,22 @@ def deployapp () {
                        
                     }
 }
+
+def ingnore-jenkins-commit () {
+    withCredentials([usernamePassword(credentialsId: 'gitlab-credintials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        // git config here for the first time run
+                        sh 'git config --global user.email "jenkins@example.com"'
+                        sh 'git config --global user.name "jenkins"'
+
+                        sh 'git status'
+                        sh 'git branch'
+                        sh 'git config --list'
+                        sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/ahmedfawzy286/java-maven-app"
+                        sh 'git add .'
+                        sh 'git commit -m "ci: version bump"'
+                        sh 'git push origin HEAD:aws-ec2-with-shared-lib'
+                    }
+}
+
+
 return this
