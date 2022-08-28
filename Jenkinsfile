@@ -15,10 +15,10 @@ pipeline {
     }
 
     stages {
-          stage('increment version') {
+          stage('increment the app version') {
             steps {
                 script {
-                    gv.increment ()
+                    gv.increment(1.1.1)
                 }
             }
         }
