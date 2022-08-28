@@ -5,7 +5,7 @@ library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
          credentialsId: 'gitlab-credintials'
         ]
 )
-def gv
+def gv = load ("script.groovy")
 
 pipeline {
     agent any    
@@ -14,14 +14,6 @@ pipeline {
     }
 
     stages {
-        stage("init") {
-            steps {
-                script {
-                    gv = load "script.groovy"
-                }
-            }
-        }
-
         stage('increment the app version') {
             steps {
                 script {                   
