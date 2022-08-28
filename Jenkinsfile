@@ -52,7 +52,14 @@ pipeline {
         stage("deploy") {
             steps {
                 script {
-                  gv.deployapp ()
+                  def bashscript = "bash ./server-cmds.sh ${IMAGE_NAME}"
+                   def ec2instance = "ec2-user@3.83.81.128"
+                    echo "deploying docker image to EC2 ..."
+                    sshagent(['ec2-server-key']) {
+                    sh "scp server-cmds.sh ${ec2instance}:/home/ec2-user"
+                    sh "scp docker-compose.yaml ${ec2instance}:/home/ec2-user"
+                    sh "ssh -o StrictHostKeyChecking=no ${ec2instance} ${bashscript}"
+                       
 
                 }
             }
