@@ -3,7 +3,7 @@ services:
     java-maven-app:
       image: flokiboats/my-repo:java-maven-1.0
       ports:
-        - 8080:8080
+        - 8081:8080
     postgres:
       image: postgres:13
       ports:
