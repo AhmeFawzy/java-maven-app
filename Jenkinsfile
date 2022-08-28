@@ -7,6 +7,7 @@ library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
 )
 
 def gv
+evaluate(new File("script.groovy"))
 pipeline {
     agent any    
     tools {
@@ -56,7 +57,7 @@ pipeline {
         stage('commit version update') {
             steps {
                 script {
-                    gv.ignore-jenkins-commit ()
+                    gv.ingnore-jenkins-commit()
                 }
             }
         }
