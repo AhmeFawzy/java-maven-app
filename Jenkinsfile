@@ -40,11 +40,13 @@ pipeline {
             steps {
                 script {
                    // def dockerCmd = "docker run -p 8080:8080 -d --name new-trial ${IMAGE_NAME}"
-                   def dockercomposecmd = "docker-compose -f docker-compose.yaml up --detach"
+                   //def dockercomposecmd = "docker-compose -f docker-compose.yaml up --detach"
+                   def bashscript = "bash ./server-cmds.sh"
                     echo "deploying docker image to EC2 ..."
                     sshagent(['ec2-server-key']) {
+                       sh "scp server-cmds.sh ec2-user@3.83.81.128:/home/ec2-user"
                        sh "scp docker-compose.yaml ec2-user@3.83.81.128:/home/ec2-user"
-                       sh "ssh -o StrictHostKeyChecking=no ec2-user@3.83.81.128 ${dockercomposecmd}"
+                       sh "ssh -o StrictHostKeyChecking=no ec2-user@3.83.81.128 ${bashscript}"
                        
                     }
 
