@@ -19,7 +19,7 @@ pipeline {
           stage('increment version') {
             steps {
                 script {
-                    
+                    gv.increment ()
                 }
             }
         }
