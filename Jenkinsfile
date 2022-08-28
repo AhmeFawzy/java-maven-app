@@ -1,11 +1,12 @@
-def gv
+#!/usr/bin/env groovy
 library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
         [$class: 'GitSCMSource',
          remote: 'https://gitlab.com/ahmedfawzy286/jenkins-shared-library.git',
          credentialsId: 'gitlab-credintials'
         ]
 )
-
+def gv
+def externalMethod = load("script.groovy")
 pipeline {
     agent any    
     tools {
@@ -16,7 +17,8 @@ pipeline {
           stage('increment the app version') {
             steps {
                 script {
-                    Increment()
+                    
+                    gv.increment()
                 }
             }
         }
