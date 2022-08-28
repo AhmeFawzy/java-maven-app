@@ -14,7 +14,7 @@ pipeline {
     }
     environment {
         IMAGE_NAME = "${env.IMAGE_NAME}"
-        gv.environment()
+        
     }
     stages {
           stage('increment version') {
