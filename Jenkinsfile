@@ -18,13 +18,14 @@ pipeline {
             }
         }
         stage('deploy') {
-            withCredentials([usernamePassword(credentialsId: 'linode', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                   
-                    }
+            
             steps {
                 script {
                    echo 'deploying docker image...'
-                   sh 'kubectl create deployment nginx-deployment --image=nginx'
+                   withKubeConfig([credentialsId: 'linode-credentials', serverUrl: https://64a2343d-448e-4772-bc77-f05e718a0bd2.eu-west-1.linodelke.net]) {
+                        sh 'kubectl create deployment nginx-deployment --image=nginx'
+                   }
+                  
                 }
             }
         }
