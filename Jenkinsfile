@@ -46,7 +46,7 @@ pipeline {
             steps {
                 script {
                     echo 'deploying docker image...'
-                    withKubeConfig([credentialsId: 'linode-credentials', serverUrl: 'https://fe719841-4d46-4671-ac58-3eca33aff964.eu-central-2.linodelke.net'])
+                    withKubeConfig([credentialsId: 'linode-credentials', serverUrl: 'https://159f584d-d051-4110-afd9-0a7386335a46.eu-central-2.linodelke.net'])
                     sh 'envsubst < kubernetes/deployment.yaml | kubectl apply -f -'
                     sh 'envsubst < kubernetes/service.yaml | kubectl apply -f -'
                 }
@@ -58,7 +58,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
                         sh 'git config user.email "jenkins@example.com"'
                         sh 'git config user.name "Jenkins"'
-                        sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/nanuchi/java-maven-app.git"
+                        sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/ahmedfawzy286/java-maven-app.git"
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
                         sh 'git push origin HEAD:jenkins-jobs'
