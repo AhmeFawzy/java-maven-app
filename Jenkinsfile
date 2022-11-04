@@ -5,6 +5,9 @@ pipeline {
     tools {
         maven 'maven-3.8.6'
     }
+    environment {              
+                APP_NAME = 'java-maven-app'
+            }
     stages {
         stage('increment version') {
             steps {
@@ -39,10 +42,7 @@ pipeline {
                 }
             }
         }
-        stage('deploy') {
-            environment {              
-                APP_NAME = 'java-maven-app'
-            }
+        stage('deploy') {          
             steps {
                 script {
                     echo 'deploying docker image...'
