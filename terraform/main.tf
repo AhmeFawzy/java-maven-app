@@ -115,7 +115,7 @@ resource "aws_instance" "myapp-server" {
     user_data = file("entry-script.sh")
 
     tags = {
-        Name = "${var.env_prefix}-server"
+        Name = "${var.env_prefix}-server"  /// test server.. the final name
     }
 }
 
