@@ -1,3 +1,12 @@
+terraform {  // configure terraform to store file remotely 
+    required_version = ">= 0.12"
+    backend "s3" {  // determines how state is loaded/stored and one of the remote storage is s3 bucket it is storage in aws used for restoring files
+        bucket ="myapp-bucket"  // this is the name
+        key = "myapp/state.tfstate"
+        region = "eu-west-3"
+    }
+}
+
 provider "aws" {
     region = var.region
 }

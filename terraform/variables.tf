@@ -14,7 +14,7 @@ variable env_prefix {
 variable my_ip {
     default = "156.223.138.179/32"
 }
-variable jenkins_ip {
+variable jenkins_ip {  //we enabled this ip to the port 22 for the sg to be able to access the server form jenkins server ( fahem? )
     default = "192.168.1.4/32"  //this is the localhost ip address you need to add it to the sg configuration as well
 }
 variable instance_type {
