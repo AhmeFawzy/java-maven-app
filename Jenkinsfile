@@ -45,7 +45,7 @@ pipeline {
                 script {
                     dir('terraform') {  //this is to go to the folder where the tf files are 
                         sh "terraform init"
-                        sh "terraform destroy --auto-approve"
+                        sh "terraform apply --auto-approve"
                         EC2_PUBLIC_IP = sh(
                             script: "terraform output ec2_public_ip",
                             returnStdout: true   //it prints out the value to the Stdout and we can save it into a value
