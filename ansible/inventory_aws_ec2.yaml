@@ -1,0 +1,11 @@
+---
+plugin: aws_ec2     #the plugin should be enablen in the ansible.cfg file
+regions: 
+  - eu-west-3
+
+keyed_groups:
+  - key: tags
+    prefix: ggroup
+  - key: instance_type
+    prefix: instance_type    #this will be shown at the start of the line to name the gorup of instances
+    
