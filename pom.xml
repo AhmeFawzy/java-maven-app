@@ -7,7 +7,7 @@
     <groupId>com.example</groupId>
     <artifactId>java-maven-app</artifactId>
     <version>1.1.1</version>
-
+     #we need to add the build block with the plugin to install the spring framework to be able to build the app as jar file
     <build>
         <plugins>
             <plugin>
