@@ -15,7 +15,7 @@ pipeline {
         stage("test") {            
             steps {
                 script {
-                    echo "deploying the branch $BRANCH_NAME"
+                    echo "deploying the branch ${env.BRANCH_NAME}"
                     gv.buildJar()
                 }
             }
