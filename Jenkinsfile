@@ -61,7 +61,7 @@ pipeline {
             steps {
                 script {
                     withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
-                        sh 'git config user.email "jenkins@flokiboats.com"'
+                        sh 'git config user.email "jenkins@example.com"'
                         sh 'git config user.name "Jenkins"'
 
                         sh 'git status'
