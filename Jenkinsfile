@@ -64,9 +64,8 @@ pipeline {
                         sh 'git config user.email "jenkins@example.com"'
                         sh 'git config user.name "Jenkins"'
 
-                        sh 'git status'
-                        sh 'git branch'
-                        sh 'git config --list'
+                        sh 'git remote show origin'
+
 
                         sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/ahmedfawzy286/java-maven-app.git"
                         sh 'git add .'
