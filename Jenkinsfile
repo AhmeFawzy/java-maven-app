@@ -6,7 +6,7 @@ pipeline {
         maven 'maven-3.8.6'
     }
     environment {
-        DOCKER_REPO_SERVER = 'flokiboats'//'664574038682.dkr.ecr.eu-west-3.amazonaws.com'
+        DOCKER_REPO_SERVER = 'flokiboats'       //'664574038682.dkr.ecr.eu-west-3.amazonaws.com'
         DOCKER_REPO = "${DOCKER_REPO_SERVER}/my-app"
     }
     stages {
