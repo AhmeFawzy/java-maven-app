@@ -68,12 +68,8 @@ pipeline {
 
 
                         sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/ahmedfawzy286/java-maven-app.git"
-                        sh 'git config --global http.proxy http://172.17.0.2:80'
-                        sh 'git config --global https.proxy https://172.17.0.2:80'
                         sh 'git add .'
                         sh 'git commit -m "ci: version bump"'
-                        
-
                         sh 'git push origin HEAD:jenkins-jobs'
                     }
                 }
