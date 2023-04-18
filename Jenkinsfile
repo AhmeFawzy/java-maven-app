@@ -2,7 +2,7 @@
 
 library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
     [$class: 'GitSCMSource',
-     remote: 'https://gitlab.com/nanuchi/jenkins-shared-library.git',
+     remote: 'https://gitlab.com/ahmedfawzy286/java-maven-app.git',
      credentialsId: 'gitlab-credentials'
     ]
 )
@@ -10,12 +10,25 @@ library identifier: 'jenkins-shared-library@master', retriever: modernSCM(
 pipeline {
     agent any
     tools {
-        maven 'Maven'
+        maven 'maven-3.8.6'
     }
-    environment {
-        IMAGE_NAME = 'nanajanashia/demo-app:java-maven-2.0'
-    }
+    
     stages {
+        stage('increment version') {
+            steps {
+                script {
+                    echo 'incrementing app version...'
+                    sh 'mvn build-helper:parse-version versions:set \
+                        -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} \
+                        versions:commit'
+                    def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                    def version = matcher[0][1]
+                    env.IMAGE_NAME = "$version-$BUILD_NUMBER"
+                }
+            }
+
+
+        }
         stage('build app') {
             steps {
                script {
@@ -76,5 +89,24 @@ pipeline {
                 }
             }
         }
+        stage('commit version update') {
+            steps {
+                script {
+                    withCredentials([usernamePassword(credentialsId: 'gitlab-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]) {
+                        sh 'git config user.email "jenkins@example.com"'
+                        sh 'git config user.name "Jenkins"'
+
+                        sh 'git remote show origin'
+
+
+                        sh "git remote set-url origin https://${USER}:${PASS}@gitlab.com/ahmedfawzy286/java-maven-app.git"
+                        sh 'git add .'
+                        sh 'git commit -m "ci: version bump"'
+                        sh 'git push origin HEAD:jenkins-jobs'
+                    }
+                }
+            }
+        }
+
     }
 }
